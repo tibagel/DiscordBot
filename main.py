@@ -1,8 +1,7 @@
 import discord
 import logging
-from parser import cmd_parser
+import discord_token
 from parser import msg_parser
-from parser import test_func
 from discord.ext import commands
 
 
@@ -23,14 +22,28 @@ async def on_message(message):
 
 @client.command()
 async def ping():
-    await client.say('Pong!')
+    await client.say('Pong!')         
+
+@client.command()
+async def echo(*args):
+    output = ''
+    for word in args:
+        output += word
+        output += ' '
+    await client.say(output)
+
+@client.command()
+async def git():
+    await client.say("https://github.com/tibagel/DiscordBot")
+
 
 @client.event
 async def on_ready():
+    await client.change_presence(game=discord.Game(name='Avec ma graine'))
     print('discord version:',discord.__version__)
     print("Logged in as")
     print(client.user.name)
-    print("------")
+    print("----------------")
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -38,5 +51,5 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8',mode='a')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s'))
 logger.addHandler(handler)
 
-toki = "Mjk0NjMzMTYyNDM5MzkzMjgx.Dd0k1g.Wd5AotBXIjLFggY4b0X0E3V1UvA"
-client.run(toki)
+
+client.run(discord_token.token_babo)
