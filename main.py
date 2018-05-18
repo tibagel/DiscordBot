@@ -8,17 +8,11 @@ from discord.ext import commands
 
 
 client = commands.Bot(command_prefix='$')
-#token = open('token.txt','r')
-#tok = token.read()
 
 @client.event
 async def on_message(message):
     msg_parser(message)
     await client.process_commands(message)
-#    print(message.attachments)
-#    test_func(message)
-#    if cmd_parser(message) == True:
-#       await client.send_message(message.channel, 'Hola senior'+' '+message.author.mention+' ! '+'eres el hombre !!')
 
 @client.command()
 async def ping():
