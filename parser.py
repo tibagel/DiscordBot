@@ -16,4 +16,3 @@ def test_func(message):
     splitted_content = message.content.split()
     for each_splitted_content in splitted_content:
         print(list(each_splitted_content))
-#if message.author.bot == True
