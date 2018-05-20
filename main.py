@@ -7,9 +7,9 @@ import configparser
 
 config = configparser.RawConfigParser()
 config.read('config.ini')
-prefix = config.get('babo','prefix')
-
+prefix = config.get('Settings','prefix')
 client = commands.Bot(command_prefix=prefix)
+
 
 @client.event
 async def on_message(message):
@@ -30,25 +30,41 @@ async def echo(*args):
 
 @client.command()
 async def git():
-    await client.say("https://github.com/tibagel/DiscordBot")
+    embed = discord.Embed(
+        title = 'GitHub Tibagel',
+        description = 'Bad code and shit',
+        colour = discord.Colour.magenta()
+        )
+    embed.set_footer(text='penchez vous tous')
+    embed.set_image(url='https://i.imgur.com/hBYEPoB.png')
+    embed.set_author(name='Le Dindon',icon_url='https://i.imgur.com/jGZ3fX1.png')
+    embed.add_field(name='Le hub du petit matin', value='https://github.com/tibagel/DiscordBot',inline=True)
+    await client.say(embed=embed)
+        
 
 
+'''
 @client.command()
 async def prefix(*args):
-    prefix = ''
+    prex = ''
     for word in args:
-        prefix += word
-        await client.say('bruh'+ prefix)
-
-
+        prex += word
+    config.set('Settings','prefix',prex)
+    with open('config.ini','w') as configfile:
+        config.write(configfile)
+    with open('config.ini','r') as configfile:
+        prex = config.get('Settings','prefix')
+'''    
 
 
 @client.command()
-async def changeGame(*args):
+async def changegame(*args):
     game = ''
     for word in args:
         game += word + ' '
     await client.change_presence(game=discord.Game(name=game))
+
+
 
 
 @client.event
@@ -65,6 +81,5 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8',mode='a')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s'))
 logger.addHandler(handler)
-
 
 client.run(discord_token.token_babo)
