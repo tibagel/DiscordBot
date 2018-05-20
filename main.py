@@ -3,10 +3,13 @@ import logging
 import discord_token
 from parser import msg_parser
 from discord.ext import commands
+import configparser
 
+config = configparser.RawConfigParser()
+config.read('config.ini')
+prefix = config.get('babo','prefix')
 
-
-client = commands.Bot(command_prefix='$')
+client = commands.Bot(command_prefix=prefix)
 
 @client.event
 async def on_message(message):
@@ -28,6 +31,24 @@ async def echo(*args):
 @client.command()
 async def git():
     await client.say("https://github.com/tibagel/DiscordBot")
+
+
+@client.command()
+async def prefix(*args):
+    prefix = ''
+    for word in args:
+        prefix += word
+        await client.say('bruh'+ prefix)
+
+
+
+
+@client.command()
+async def changeGame(*args):
+    game = ''
+    for word in args:
+        game += word + ' '
+    await client.change_presence(game=discord.Game(name=game))
 
 
 @client.event
