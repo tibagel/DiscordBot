@@ -7,7 +7,7 @@ import Commands
 
 config = configparser.RawConfigParser()
 config.read('config.ini')
-prefix = config.get('Settings','prefix')
+prefix = config.get('Settings', 'prefix')
 client = commands.Bot(command_prefix=prefix)
 
 
@@ -16,24 +16,11 @@ async def on_message(message):
     msg_parser(message)
     await client.process_commands(message)
 
-'''
-@client.command()
-async def prefix(*args):
-    prex = ''
-    for word in args:
-        prex += word
-    config.set('Settings','prefix',prex)
-    with open('config.ini','w') as configfile:
-        config.write(configfile)
-    with open('config.ini','r') as configfile:
-        prex = config.get('Settings','prefix')
-'''    
-
 
 @client.event
 async def on_ready():
     await client.change_presence(game=discord.Game(name='Avec ma graine'))
-    print('discord version:',discord.__version__)
+    print('discord version:', discord.__version__)
     print("Logged in as")
     print(client.user.name)
     print("----------------")
@@ -41,6 +28,6 @@ async def on_ready():
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8',mode='a')
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='a')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s'))
 logger.addHandler(handler)
