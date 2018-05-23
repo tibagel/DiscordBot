@@ -39,6 +39,7 @@ def check_dirs(server, channels):
     global config_checked
     config_checked = True
 
+
 def write_to_log(message):
     global config_checked
     if not config_checked:
