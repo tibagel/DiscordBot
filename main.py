@@ -83,76 +83,14 @@ async def on_message(message):
     msg_parser(message)
     await client.process_commands(message)
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-@client.command()
-async def ping():
-    await client.say('Pong!')
-
-@client.command(pass_context=True)
-async def clear(ctx,amount=2):
-    channel = ctx.message.channel
-    messages = []
-    async for message in client.logs_from(channel, limit=int(amount)):
-        messages.append(message)
-    await client.delete_messages(messages)
-    await client.say(str(len(messages))+" messages were deleted.",delete_after=float(3))
-
-@client.command()
-async def echo(*args):
-    output = ''
-    for word in args:
-        output += word
-        output += ' '
-    await client.say(output)
-
-@client.command()
-async def git():
-    embed = discord.Embed(
-        title = 'GitHub Tibagel',
-        description = 'Bad code and shit',
-        colour = discord.Colour.magenta()
-        )
-    embed.set_footer(text='penchez vous tous')
-    embed.set_image(url='https://i.imgur.com/hBYEPoB.png')
-    embed.set_author(name='Le Dindon',icon_url='https://i.imgur.com/jGZ3fX1.png')
-    embed.add_field(name='Le hub du petit matin', value='https://github.com/tibagel/DiscordBot',inline=True)
-    await client.say(embed=embed)
-        
-
-
->>>>>>> Stashed changes
-'''
-@client.command()
-async def prefix(*args):
-    prex = ''
-    for word in args:
-        prex += word
-    config.set('Settings','prefix',prex)
-    with open('config.ini','w') as configfile:
-        config.write(configfile)
-    with open('config.ini','r') as configfile:
-        prex = config.get('Settings','prefix')
-'''    
-
-=======
->>>>>>> master
 
 @client.event
 =======
 >>>>>>> master
 async def on_ready():
     await client.change_presence(game=discord.Game(name='Avec ma graine'))
-<<<<<<< HEAD
     print('discord version: {}\nLogged in as: {}'.format(discord.__version__,client.user.name))
     print("------------------------------------")
-=======
-    print('discord version:', discord.__version__)
-    print("Logged in as")
-    print(client.user.name)
-    print("----------------")
->>>>>>> master
 
 
 @client.event
