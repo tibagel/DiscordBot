@@ -2,7 +2,7 @@ from main import client
 
 
 @client.command(pass_context=True)
-async def clear(ctx,amount=2):
+async def clear(ctx, amount=2):
     channel = ctx.message.channel
     messages = []
     async for message in client.logs_from(channel, limit=int(amount)):

@@ -8,9 +8,15 @@ import os
 import re
 import requests
 import Commands
+import asyncio
 
 global config_checked
 config_checked = False
+config = configparser.RawConfigParser()
+config.read('config.ini')
+prefix = config.get('Settings', 'prefix')
+client = commands.Bot(command_prefix=prefix)
+text_triggers = {}
 
 
 def check_dirs(server, channels):
@@ -31,13 +37,27 @@ def check_dirs(server, channels):
             os.makedirs(Path(path+"Files"))  # Subfolder Files
             print("Created ", channel.name, "directory at:", path)
 
-    config_file_path = Path(server+"/config_file.ini")
+    # Initializing the basic triggers.ini or loading it
+    config_file_path = Path(server+"/triggers.ini")
     if not config_file_path.exists():
-        config_file = open(server+"/config_file.ini", "w")
+        config_file = open(config_file_path, "w")
+        trigger_config = configparser.ConfigParser()
+        trigger_config.add_section("text_triggers")
+        trigger_config.add_section("sound_triggers")
+        trigger_config.set("text_triggers", "soer", "matin")
+        trigger_config.write(config_file)
         config_file.close()
+    else:
+        trigger_config = configparser.ConfigParser()
+        trigger_config.read(config_file_path)
+        for key, val in trigger_config.items("text_triggers"):
+            text_triggers[key] = val
+
+        print(text_triggers)
 
     global config_checked
     config_checked = True
+
 
 def write_to_log(message):
     global config_checked
@@ -64,17 +84,19 @@ def write_to_log(message):
         with open(path, "wb") as file:
             file.write(request)
 
-    else:
+    else:  # If it's text, it goes in a text file, duh
         text_log_path = Path(message.server.id + "/" + message.channel.name + "/text_logs.txt")
         text_log_file = open(text_log_path, "a+")
         print(msg_parser(message))
         text_log_file.write(msg_parser(message))
 
 
-config = configparser.RawConfigParser()
-config.read('config.ini')
-prefix = config.get('Settings', 'prefix')
-client = commands.Bot(command_prefix=prefix)
+@asyncio.coroutine
+async def check_for_triggers(message):
+    content = message.content
+    for key in text_triggers:
+        if key in content:
+            await client.send_message(message.channel, text_triggers[key])
 
 
 @client.event
@@ -102,11 +124,11 @@ async def on_message(message):
 
     content = message.content
     author = message.author
-    if not author.bot and content.startswith("$"):  # If the author is not a bot
+    if not author.bot and content.startswith(prefix):  # If the author is not a bot(Neo is that you? )
         await client.process_commands(message)
-        await client.delete_message(message)
-    else:
+    elif not author.bot:
         write_to_log(message)
+        await check_for_triggers(message)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
