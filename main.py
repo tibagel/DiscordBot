@@ -100,15 +100,12 @@ async def check_for_triggers(message):
 
 
 @client.event
-<<<<<<< HEAD
 async def on_message(message):
     msg_parser(message)
     await client.process_commands(message)
 
 
 @client.event
-=======
->>>>>>> master
 async def on_ready():
     await client.change_presence(game=discord.Game(name='Avec ma graine'))
     print('discord version: {}\nLogged in as: {}'.format(discord.__version__,client.user.name))
