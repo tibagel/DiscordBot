@@ -16,7 +16,7 @@ async def gsearch(*args):
     for words in args:
         wut += words
         wut += ' '
-        results= google_search(wut,my_api_key,my_cse_id,num=4) 
+        results= google_search(wut,my_api_key,my_cse_id,num=1) 
     for result in results:
         await client.say(str(result['link']))
         
