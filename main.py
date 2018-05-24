@@ -119,7 +119,6 @@ async def on_message(message):
     author = message.author
     if not author.bot and content.startswith(prefix):  # If the author is not a bot(Neo is that you? )
         await client.process_commands(message)
-        await client.delete_message(message)
     elif not author.bot:
         write_to_log(message)
         await check_for_triggers(message)
