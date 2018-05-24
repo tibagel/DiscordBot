@@ -4,8 +4,7 @@ from Commands import echo
 from Commands import ping
 from Commands import clear
 from Commands import prefix
-from Commands import get_logs
-from Commands import trigger_commands
+from Commands import googlesearch
 from main import client
 from discord_token import token_babo
 
