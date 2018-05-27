@@ -1,5 +1,4 @@
 from Commands.commands import Commands
-from pathlib import Path
 from discord import File
 
 class GetLogs(Commands):
