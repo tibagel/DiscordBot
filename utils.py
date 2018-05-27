@@ -4,7 +4,6 @@ from token_babo import my_api_key
 from token_babo import my_cse_id
 import configparser
 import shlex
-from bot_info import BotInfo
 
 
 class Utils:
