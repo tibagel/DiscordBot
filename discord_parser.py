@@ -2,6 +2,7 @@ from time import gmtime, strftime
 from googleapiclient.discovery import build
 from token_babo import my_api_key
 from token_babo import my_cse_id
+import configparser
 
 class Utils():
 
@@ -43,3 +44,8 @@ class Utils():
         results = Utils.google_search(search, my_api_key, my_cse_id, num=1)
         for result in results:
             return result['link']
+
+    def get_config(setting,option):
+        config = configparser.RawConfigParser()
+        config.read('config.ini')
+        return  config.get(setting,option)
