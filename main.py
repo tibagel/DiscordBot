@@ -15,6 +15,7 @@ class MyClient(discord.Client):
     commands['search'] = Gsearch()
     commands['getlogs'] = GetLogs()
 
+
     global config_checked
     config_checked = False
     config = configparser.RawConfigParser()
