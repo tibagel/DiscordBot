@@ -1,4 +1,3 @@
-import discord
 from pathlib import Path
 import os
 import configparser
@@ -58,7 +57,7 @@ class Logger:
         attachments = message.attachments
         if attachments:  # If the message contains something
             image_regex = re.compile(
-                "(http(s)?):(\\/\\/[a-z0-9A-Z\\+%&\\?\\.\\/_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
+                "(http(s)?):(/\\/[a-z0-9A-Z\\+%&\\?\\.\\/_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
             attachment = attachments[0]
             attachment_url = attachment["url"]
             attachment_filename = attachment["filename"]

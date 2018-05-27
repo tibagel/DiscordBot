@@ -1,8 +1,6 @@
 import discord
-import token_babo
 from utils import Utils
 from Commands import *
-import asyncio
 import configparser
 from logger import Logger
 
@@ -13,6 +11,7 @@ class MyClient(discord.Client):
     commands["clear"] = Clear()
     commands['changeGame'] = ChangeGame()
     commands['Gsearch'] = Gsearch()
+    commands['getlogs'] = GetLogs()
 
     global config_checked
     config_checked = False
@@ -21,7 +20,6 @@ class MyClient(discord.Client):
     global prefix
     prefix = Utils.get_config('Settings','prefix')
     text_triggers = {}
-
 
     async def on_ready(self):
         print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
