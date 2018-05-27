@@ -3,6 +3,7 @@ from googleapiclient.discovery import build
 from token_babo import my_api_key
 from token_babo import my_cse_id
 import configparser
+import re
 
 class Utils():
 
@@ -23,7 +24,9 @@ class Utils():
         no_head_split = no_head.split(" ")
         invoke = no_head_split[0]
         raw_args = no_head.replace(invoke, "", 1)
-        if '"' in raw_args:
+        args_regex = re.search("\"(.*?)\"", raw_args)
+        if args_regex:
+            print(args_regex.group(0))
             split = raw_args.split('"')
         else:
             split = raw_args.split(" ")
@@ -45,7 +48,7 @@ class Utils():
         for result in results:
             return result['link']
 
-    def get_config(setting,option):
+    def get_config(setting, option):
         config = configparser.RawConfigParser()
         config.read('config.ini')
-        return  config.get(setting,option)
+        return  config.get(setting, option)
