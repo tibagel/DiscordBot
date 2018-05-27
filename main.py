@@ -4,6 +4,7 @@ from utils import Utils
 from Commands import *
 import asyncio
 import configparser
+from logger import Logger
 
 
 class MyClient(discord.Client):
@@ -26,7 +27,8 @@ class MyClient(discord.Client):
         await client.change_presence(game=discord.Game(name="vec ma graine"))
 
     async def on_message(self, msg):
-        check_dirs(message.guild.id, client.get_all_channels())
+        logger = Logger()
+        logger.check_dirs(msg.guild.id, msg.guild.text_channels)
         content = msg.content
         print(Utils.msg_parser(msg))
         with open('text_log.txt', 'a') as file:
@@ -36,10 +38,12 @@ class MyClient(discord.Client):
                 await msg.channel.send(Utils.q_google('dindon'))
 
         parser = Utils(msg)
-        if prefix in content:
+        if prefix in content and not msg.author.bot:
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
-
+        else:
+            logger.write_to_log(message=msg)
+            await logger.check_for_triggers(msg)
 
 client = MyClient()
