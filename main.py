@@ -34,8 +34,6 @@ class MyClient(discord.Client):
         with open('text_log.txt', 'a') as file:
             file.write(Utils.msg_parser(msg) + '\n')
             file.close()
-            if content == '$babo':
-                await msg.channel.send(Utils.q_google('dindon'))
 
         parser = Utils(msg)
         if prefix in content and not msg.author.bot:
