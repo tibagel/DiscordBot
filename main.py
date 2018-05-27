@@ -1,23 +1,22 @@
 import discord
 import token_babo
-from discord_parser import Discord_parser
-import goosearch
+from discord_parser import Utils
 
 
 class MyClient(discord.Client):
 
     async def on_ready(self):
-        print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
+        print('|logged in as {} .  The discord version is {}|'.format(self.user,discord.__version__))
 
     async def on_message(self, message):
-        print(Discord_parser.msg_parser(message))
-        with open('text_log.txt', 'a') as file:
-            file.write(Discord_parser.msg_parser(message) + '\n')
+        print(Utils.msg_parser(message))
+        with open('text_log.txt','a') as file:
+            file.write(Utils.msg_parser(message)+ '\n')
             file.close()
             if message.content == '$babo':
-                await message.channel.send(goosearch.q_google('dindon'))
+                await message.channel.send(Utils.q_google('dindon'))
 
-        parser = Discord_parser(message)
+        parser = Utils(message)
         if "!" in message.content:
             parser.cmd_parser()
         else:
