@@ -1,4 +1,3 @@
-import discord
 from pathlib import Path
 import os
 import configparser
@@ -17,8 +16,6 @@ class Logger:
         if not server_dir.exists():  # Checking if the log directory exists for this server
             os.makedirs(server_dir)
             print("Folder:", server_dir, "created")
-        else:
-            print("Dir exists")
 
         for channel in channels:
             path = str(server) + "/" + channel.name + "/"
@@ -46,7 +43,6 @@ class Logger:
             for key, val in trigger_config.items("text_triggers"):
                 text_triggers[key] = val
 
-            print(text_triggers)
 
         global config_checked
         config_checked = True
