@@ -1,26 +1,32 @@
 import discord
 import token_babo
-from discord_parser import Utils
+from utils import Utils
+from Commands import *
 
 
 class MyClient(discord.Client):
+    commands = dict()
+    commands["ping"] = PingCommand()
 
     async def on_ready(self):
         print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
 
-    async def on_message(self, message):
-        print(Utils.msg_parser(message))
-        with open('text_log.txt','a') as file:
-            file.write(Utils.msg_parser(message) + '\n')
+    async def on_message(self, msg):
+        content = msg.content
+        print(Utils.msg_parser(msg))
+        with open('text_log.txt', 'a') as file:
+            file.write(Utils.msg_parser(msg) + '\n')
             file.close()
-            if message.content == '$babo':
-                await message.channel.send(Utils.q_google('dindon'))
+            if content == '$babo':
+                await msg.channel.send(Utils.q_google('dindon'))
 
-        parser = Utils(message)
-        if "!" in message.content:
-            parser.cmd_parser()
+        parser = Utils(msg)
+        if "!" in content:
+            cmd = parser.cmd_parser()
+            if cmd.invoke in content:
+                await self.commands["ping"].action(msg=msg)
         else:
-            print(parser.msg_parser())
+            parser.msg_parser()
 
 
 client = MyClient()
