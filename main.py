@@ -7,12 +7,12 @@ import goosearch
 class MyClient(discord.Client):
 
     async def on_ready(self):
-        print('|logged in as {} .  The discord version is {}|'.format(self.user,discord.__version__))
+        print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
 
     async def on_message(self, message):
         print(Discord_parser.msg_parser(message))
-        with open('text_log.txt','a') as file:
-            file.write(Discord_parser.msg_parser(message)+ '\n')
+        with open('text_log.txt', 'a') as file:
+            file.write(Discord_parser.msg_parser(message) + '\n')
             file.close()
             if message.content == '$babo':
                 await message.channel.send(goosearch.q_google('dindon'))

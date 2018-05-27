@@ -8,7 +8,8 @@ def google_search(search_term, api_key, cse_id, **kwargs):
     res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
     return res['items']
 
+
 def q_google(search):
-    results = google_search(search,my_api_key,my_cse_id,num=1)
+    results = google_search(search, my_api_key, my_cse_id, num=1)
     for result in results:
         return result['link']

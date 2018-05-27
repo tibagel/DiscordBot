@@ -19,11 +19,10 @@ class Discord_parser():
         no_head = content.replace("!", "")
         no_head_split = no_head.split(" ")
         invoke = no_head_split[0]
-        raw_args = no_head.replace(invoke, "")
-        print(raw_args)
+        raw_args = no_head.replace(invoke, "", 1)!s
         if '"' in raw_args:
-            splitted = str(no_head_split).split('"')
+            splitted = raw_args.split('"')
         else:
-            splitted = str(no_head_split).split(" ")
-
+            splitted = raw_args.split(" ")
+        del splitted[0]
         print(splitted)
