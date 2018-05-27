@@ -48,9 +48,6 @@ class Logger:
         config_checked = True
 
     def write_to_log(self, message):
-        from main import client
-        self.check_dirs(message.guild, client.get_all_channels())
-
         attachments = message.attachments
         if attachments:  # If the message contains something
             image_regex = re.compile(

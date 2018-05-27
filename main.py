@@ -29,7 +29,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, msg):
         logger = Logger()
-        logger.check_dirs(msg.guild.id, msg.guild.text_channels)
+        Logger.check_dirs(logger, msg.guild.id, msg.guild.text_channels)
         content = msg.content
         print(Utils.msg_parser(msg))
         with open('text_log.txt', 'a') as file:
