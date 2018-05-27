@@ -14,13 +14,15 @@ class MyClient(discord.Client):
     commands['changeGame'] = ChangeGame()
     commands['search'] = Gsearch()
     commands['getlogs'] = GetLogs()
+    commands['trigger'] = TriggerCommands()
+    commands['prefix'] = Prefix()
 
     global config_checked
     config_checked = False
     config = configparser.RawConfigParser()
     config.read('config.ini')
     global prefix
-    prefix = Utils.get_config('Settings','prefix')
+    prefix = ""
     text_triggers = {}
 
     async def on_ready(self):
@@ -28,6 +30,8 @@ class MyClient(discord.Client):
         await client.change_presence(game=discord.Game(name="vec ma graine"))
 
     async def on_message(self, msg):
+        global prefix
+        prefix = Utils.get_config('Settings', 'prefix')
         logger = Logger()
         Logger.check_dirs(logger, msg.guild.id, msg.guild.text_channels)
         content = msg.content
@@ -41,9 +45,13 @@ class MyClient(discord.Client):
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
-        else:
+        elif not msg.author.bot:
             logger.write_to_log(message=msg)
             await logger.check_for_triggers(msg)
+
+    def get_prefix(self):
+        return prefix
+
 
 
 client = MyClient()
