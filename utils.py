@@ -20,8 +20,9 @@ class Utils:
         return formatted_msg
 
     def cmd_parser(self):
+        from main import client
         content = self.content
-        no_head = content.replace("!", "")
+        no_head = content.replace(client.get_prefix(), "")
         no_head_split = no_head.split(" ")
         invoke = no_head_split[0]
         raw_args = no_head.replace(invoke, "", 1)

@@ -80,3 +80,6 @@ class Logger:
         for key in text_triggers:
             if key in content:
                 await message.channel.send(text_triggers[key])
+
+    def get_triggers(self):
+        return text_triggers
