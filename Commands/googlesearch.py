@@ -9,6 +9,3 @@ class Gsearch(Commands):
             output += word + ' '
         url = Utils.q_google(output)
         await msg.channel.send('This is your URL: {}'.format(url))
-
-
-

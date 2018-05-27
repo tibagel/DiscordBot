@@ -1,9 +1,6 @@
 import discord
-import token_babo
 from utils import Utils
 from Commands import *
-import asyncio
-import configparser
 
 
 class MyClient(discord.Client):
@@ -11,7 +8,7 @@ class MyClient(discord.Client):
     commands["ping"] = PingCommand()
     commands["clear"] = Clear()
     commands['changeGame'] = ChangeGame()
-    commands['Gsearch'] = Gsearch()
+    commands['search'] = Gsearch()
 
     global config_checked
     config_checked = False
