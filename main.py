@@ -1,8 +1,6 @@
 import discord
-import token_babo
 from utils import Utils
 from Commands import *
-import asyncio
 import configparser
 from logger import Logger
 
@@ -16,6 +14,7 @@ class MyClient(discord.Client):
     commands['getlogs'] = GetLogs()
     commands['trigger'] = TriggerCommands()
     commands['prefix'] = Prefix()
+    commands['join'] = Join_Voices()
 
 
     global config_checked
