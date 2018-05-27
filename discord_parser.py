@@ -23,11 +23,16 @@ class Utils():
         invoke = no_head_split[0]
         raw_args = no_head.replace(invoke, "", 1)
         if '"' in raw_args:
-            splitted = raw_args.split('"')
+            split = raw_args.split('"')
         else:
-            splitted = raw_args.split(" ")
-        del splitted[0]
-        print(splitted)
+            split = raw_args.split(" ")
+        del split[0]
+        i = 0
+        for entry in split:
+            split[i] = split[i].strip()
+            i += 1
+        args = split
+        print(args)
 
     def google_search(search_term, api_key, cse_id, **kwargs):
         service = build("customsearch", "v1", developerKey=api_key)
