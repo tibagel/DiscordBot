@@ -44,4 +44,5 @@ class MyClient(discord.Client):
             logger.write_to_log(message=msg)
             await logger.check_for_triggers(msg)
 
+
 client = MyClient()
