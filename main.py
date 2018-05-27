@@ -9,9 +9,11 @@ class MyClient(discord.Client):
     commands = dict()
     commands["ping"] = PingCommand()
     commands["clear"] = Clear()
+    commands['changeGame'] = ChangeGame()
 
     async def on_ready(self):
         print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
+        await client.change_presence(game=discord.Game(name="vec ma graine"))
 
     async def on_message(self, msg):
         content = msg.content
@@ -26,8 +28,7 @@ class MyClient(discord.Client):
         if "!" in content:
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
-                loop = client.loop
-                client.loop.create_task(self.commands[cmd.invoke].action(msg=msg, args=cmd.args))
+                await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
 
         else:
             parser.msg_parser()
