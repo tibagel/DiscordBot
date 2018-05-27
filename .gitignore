@@ -32,3 +32,7 @@ venv/lib/python3\.6/site-packages/
 venv/
 
 \.idea/
+
+__pycache__/
+
+text_log\.txt

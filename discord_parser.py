@@ -12,7 +12,7 @@ class Discord_parser():
         time_recv = strftime('|%Y-%m-%d %H:%M:%S|', gmtime())
         msg = [time_recv, self.channel, self.author, self.content]
         formatted_msg = ('{}~{}~| {}: {} '.format(*msg))
-        return formatted_msg + "\n"
+        return formatted_msg
 
     def cmd_parser(self):
         content = self.content
