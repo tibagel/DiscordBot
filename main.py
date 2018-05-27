@@ -1,6 +1,6 @@
 import discord
 import token_babo
-from discord_parser import Utils
+from utils import Utils
 
 
 class MyClient(discord.Client):
@@ -19,8 +19,6 @@ class MyClient(discord.Client):
         parser = Utils(message)
         if "!" in message.content:
             parser.cmd_parser()
-        else:
-            print(parser.msg_parser())
 
 
 client = MyClient()
