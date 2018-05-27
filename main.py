@@ -10,14 +10,17 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
         print(Utils.msg_parser(message))
-        try:
-            with open('text_log.txt','a') as file:
-                file.write(Utils.msg_parser(message)+ '\n')
-                file.close()
+        with open('text_log.txt','a') as file:
+            file.write(Utils.msg_parser(message)+ '\n')
+            file.close()
             if message.content == '$babo':
                 await message.channel.send(Utils.q_google('dindon'))
-        except Exception as e:
-            print(e)
+
+        parser = Utils(message)
+        if "!" in message.content:
+            parser.cmd_parser()
+        else:
+            print(parser.msg_parser())
 
 
 client = MyClient()
