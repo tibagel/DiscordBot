@@ -1,12 +1,12 @@
-from Commands import commands
+from Commands.commands import Commands
 
 
-class PingCommand(commands.Commands):
+class PingCommand(Commands):
 
     def __init__(self):
         self.ouin =""
 
-    async def action(self, msg):
+    async def action(self, msg, args):
         await msg.channel.send("pong")
 
     async def help(self, msg):

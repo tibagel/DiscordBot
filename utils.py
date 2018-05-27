@@ -4,10 +4,10 @@ from token_babo import my_api_key
 from token_babo import my_cse_id
 import configparser
 import shlex
+from bot_info import BotInfo
 
 
 class Utils:
-
     def __init__(self, msg):
         self.channel = msg.channel
         self.author = msg.author
@@ -46,7 +46,6 @@ class Utils:
 
 
 class CmdContainer:
-
     def __init__(self, invoke, args, msg):
         self.invoke = invoke
         self.args = args
