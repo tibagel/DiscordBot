@@ -1,6 +1,8 @@
 import discord
+import token_babo
 from utils import Utils
 from Commands import *
+import asyncio
 import configparser
 from logger import Logger
 
@@ -10,7 +12,7 @@ class MyClient(discord.Client):
     commands["ping"] = PingCommand()
     commands["clear"] = Clear()
     commands['changeGame'] = ChangeGame()
-    commands['Gsearch'] = Gsearch()
+    commands['search'] = Gsearch()
     commands['getlogs'] = GetLogs()
 
     global config_checked
@@ -33,8 +35,6 @@ class MyClient(discord.Client):
         with open('text_log.txt', 'a') as file:
             file.write(Utils.msg_parser(msg) + '\n')
             file.close()
-            if content == '$babo':
-                await msg.channel.send(Utils.q_google('dindon'))
 
         parser = Utils(msg)
         if prefix in content and not msg.author.bot:
