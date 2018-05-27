@@ -12,13 +12,14 @@ class MyClient(discord.Client):
     commands["ping"] = PingCommand()
     commands["clear"] = Clear()
     commands['changeGame'] = ChangeGame()
+    commands['Gsearch'] = Gsearch()
 
     global config_checked
     config_checked = False
     config = configparser.RawConfigParser()
     config.read('config.ini')
     global prefix
-    prefix = config.get('Settings', 'prefix')
+    prefix = Utils.get_config('Settings','prefix')
     text_triggers = {}
 
 
@@ -34,6 +35,8 @@ class MyClient(discord.Client):
         with open('text_log.txt', 'a') as file:
             file.write(Utils.msg_parser(msg) + '\n')
             file.close()
+            if content == '$babo':
+                await msg.channel.send(Utils.q_google('dindon'))
 
         parser = Utils(msg)
         if prefix in content and not msg.author.bot:
