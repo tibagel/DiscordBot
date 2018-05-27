@@ -1,6 +1,7 @@
 from Commands.commands import Commands
 from discord import File
 
+
 class GetLogs(Commands):
     async def action(self, msg, args):
         channel = msg.channel

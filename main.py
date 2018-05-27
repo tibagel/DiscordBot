@@ -30,28 +30,23 @@ class MyClient(discord.Client):
         await client.change_presence(game=discord.Game(name="vec ma graine"))
 
     async def on_message(self, msg):
-        global prefix
-        prefix = Utils.get_config('Settings', 'prefix')
         logger = Logger()
         Logger.check_dirs(logger, msg.guild.id, msg.guild.text_channels)
+        global prefix
+        prefix = Utils.get_config('Settings', prefix, msg)
         content = msg.content
         print(Utils.msg_parser(msg))
-        with open('text_log.txt', 'a') as file:
-            file.write(Utils.msg_parser(msg) + '\n')
-            file.close()
-
         parser = Utils(msg)
+
         if prefix in content and not msg.author.bot:
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
         elif not msg.author.bot:
-            logger.write_to_log(message=msg)
+            logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
 
     def get_prefix(self):
         return prefix
-
-
 
 client = MyClient()
