@@ -5,8 +5,6 @@ from Commands import *
 import asyncio
 import configparser
 from logger import Logger
-import cleverbot3
-from VoiceTest import Join_Voices
 
 
 class MyClient(discord.Client):
@@ -18,7 +16,8 @@ class MyClient(discord.Client):
     commands['getlogs'] = GetLogs()
     commands['trigger'] = TriggerCommands()
     commands['prefix'] = Prefix()
-    commands['dinde'] = Join_Voices()
+    commands['dinde'] = dinde()
+
 
     global config_checked
     config_checked = False
@@ -45,14 +44,9 @@ class MyClient(discord.Client):
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
-
-        elif not msg.author.bot and msg.channel.name == "wathever":
-            bot = cleverbot3.Cleverbot()
-            await msg.channel.send(bot.ask("ffs"))
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
-
 
     def get_prefix(self):
         return prefix
