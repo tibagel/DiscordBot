@@ -3,6 +3,7 @@ from utils import Utils
 from Commands import *
 import configparser
 from logger import Logger
+from Voice_Player import Voice_Player
 
 
 class MyClient(discord.Client):
