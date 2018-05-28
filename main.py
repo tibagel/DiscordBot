@@ -5,7 +5,8 @@ from Commands import *
 import asyncio
 import configparser
 from logger import Logger
-from clever_bot import CleverBot
+import cleverbot3
+from VoiceTest import Join_Voices
 
 
 class MyClient(discord.Client):
@@ -17,6 +18,7 @@ class MyClient(discord.Client):
     commands['getlogs'] = GetLogs()
     commands['trigger'] = TriggerCommands()
     commands['prefix'] = Prefix()
+    commands['join'] = Join_Voices()
 
     global config_checked
     config_checked = False
@@ -45,8 +47,8 @@ class MyClient(discord.Client):
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
 
         elif not msg.author.bot and msg.channel.name == "wathever":
-            bot = CleverBot(user='IFdJiwbiZRevqtyH', key='hzDr10LQlFShIhn3WSDbEQsDplyW9PPS')
-            await msg.channel.send(bot.query(msg.content))
+            bot = cleverbot3.Cleverbot()
+            await msg.channel.send(bot.ask("ffs"))
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
