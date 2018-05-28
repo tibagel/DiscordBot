@@ -19,6 +19,6 @@ class Voice_Player:
     async def voice_disconnect(self):
         await self.vc.disconnect()
 
-    async def audio_play(self):
+    async def file_play(self,file):
         vc = self.vc
-        vc.play(discord.FFmpegPCMAudio('Turkey.mp3'))
+        vc.play(discord.FFmpegPCMAudio(file))

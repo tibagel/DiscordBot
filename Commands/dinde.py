@@ -13,6 +13,6 @@ class dinde(Commands):
     async def action(self, msg, args):
         vp = Voice_Player(msg)
         await vp.join_voice()
-        await vp.audio_play()
+        await vp.file_play('Turkey.mp3')
         time.sleep(1)
         await vp.voice_disconnect()
