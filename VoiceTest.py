@@ -14,5 +14,6 @@ class Join_Voices(Commands):
     async def action(self, msg, args):
         vp = Voice_Player(msg)
         await vp.join_voice()
-        time.sleep(5)
+        vp.vc.play(discord.FFmpegPCMAudio('Turkey.mp3'), after=lambda e: print('done', e))
+        time.sleep(1)
         await vp.voice_disconnect()

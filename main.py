@@ -18,7 +18,7 @@ class MyClient(discord.Client):
     commands['getlogs'] = GetLogs()
     commands['trigger'] = TriggerCommands()
     commands['prefix'] = Prefix()
-    commands['join'] = Join_Voices()
+    commands['dinde'] = Join_Voices()
 
     global config_checked
     config_checked = False
