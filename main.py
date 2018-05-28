@@ -5,6 +5,7 @@ from Commands import *
 import asyncio
 import configparser
 from logger import Logger
+from clever_bot import CleverBot
 
 
 class MyClient(discord.Client):
@@ -42,9 +43,14 @@ class MyClient(discord.Client):
             cmd = parser.cmd_parser()
             if cmd.invoke in content:
                 await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+
+        elif not msg.author.bot and msg.channel.name == "wathever":
+            bot = CleverBot(user='IFdJiwbiZRevqtyH', key='hzDr10LQlFShIhn3WSDbEQsDplyW9PPS')
+            await msg.channel.send(bot.query(msg.content))
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
+
 
     def get_prefix(self):
         return prefix
