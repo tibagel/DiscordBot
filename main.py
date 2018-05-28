@@ -1,8 +1,6 @@
 import discord
-import token_babo
 from utils import Utils
 from Commands import *
-import asyncio
 import configparser
 from logger import Logger
 
