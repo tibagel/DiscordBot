@@ -37,6 +37,6 @@ class Voice_Player:
 			}
 			with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 				ydl.download([url])
-				self.vc.play(discord.FFmpegPCMAudio('yt.m4a'), after=lambda self: self.vc.disconnect())
+				self.vc.play(discord.FFmpegPCMAudio('yt.m4a'), after=lambda self: asyncio.run_coroutine_threadsafe(self.vc.disconnect()))
 			if not self.vc.is_playing():
 				os.remove('yt.m4a')
