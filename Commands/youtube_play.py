@@ -7,7 +7,7 @@ from discord import opus
 
 client = discord.Client()
 lib = find_library('opus')
-opus.load_opus(lib)
+opus.load_opus
 
 class play(Commands):
     async def action(self, msg, args):
