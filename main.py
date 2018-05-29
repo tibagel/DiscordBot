@@ -37,6 +37,7 @@ class MyClient(discord.Client):
         content = msg.content
         print(Utils.msg_parser(msg))
         parser = Utils(msg)
+        client.get_user()
 
         if prefix in content and not msg.author.bot:
             cmd = parser.cmd_parser()

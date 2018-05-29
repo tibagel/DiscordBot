@@ -9,4 +9,4 @@ from Commands.trigger_commands import TriggerCommands
 from Commands.prefix import Prefix
 from main import client
 import token_babo
-client.run(token_babo.token)
+client.get_guild()
