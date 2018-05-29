@@ -10,4 +10,4 @@ from Commands.youtube_play import play
 from Commands.prefix import Prefix
 from main import client
 import token_babo
-client.get_guild()
+client.get_guild().
