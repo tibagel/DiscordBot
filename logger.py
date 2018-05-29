@@ -48,26 +48,24 @@ class Logger:
         config_checked = True
 
     def write_to_log(self, msg):
-        attachments = msg.attachments
-        if attachments:  # If the message contains something
-            image_regex = re.compile(
-                "(http(s)?):(/\\/[a-z0-9A-Z\\+%&\\?\\.\\/_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
-            attachment = attachments[0]
-            attachment_url = attachment["url"]
-            attachment_filename = attachment["filename"]
+        atts = msg.attachments
+        if atts:  # If the message contains something
+            for att in atts:
+                if att.height > 0:
+                    image_regex = re.compile(
+                        "(http(s)?):(//[a-z0-9A-Z+%&?./_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
+                    svr = str(msg.guild.id)
+                    chan_name = msg.channel.name
+                    request = requests.get(att.url).content
+                    global path
+                    path = ""
+                    if image_regex.match(att.url):  # The attachment is an image
+                        path = svr + "/" + chan_name + "/Images/" + att.filename
+                    else:  # Setting the path accordingly
+                        path = svr + "/" + chan_name + "/Files/" + att.filename
 
-            svr = str(msg.guild.id)
-            chan_name = msg.channel.name
-            request = requests.get(attachment_url).content
-            global path
-            path = ""
-            if image_regex.match(attachment_url):  # The attachment is an image
-                path = svr + "/" + chan_name + "/Images/" + attachment_filename
-            else:  # Setting the path accordingly
-                path = svr + "/" + chan_name + "/Files/" + attachment_filename
-
-            with open(path, "wb") as file:
-                file.write(request)
+                    with open(path, "wb") as file:
+                        file.write(request)
 
         else:  # If it's text, it goes in a text file, duh
             text_log_path = Path(str(msg.guild.id) + "/" + msg.channel.name + "/text_logs.txt")
