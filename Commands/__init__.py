@@ -7,6 +7,8 @@ from Commands.dinde import dinde
 from Commands.get_logs import GetLogs
 from Commands.trigger_commands import TriggerCommands
 from Commands.youtube_play import play
+from Commands.Stop_player import stop_player
+from Commands.Pure_Soire import pure_soir
 from Commands.prefix import Prefix
 from main import client
 import token_babo
