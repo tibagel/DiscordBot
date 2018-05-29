@@ -6,6 +6,7 @@ from Commands.googlesearch import Gsearch
 from Commands.dinde import dinde
 from Commands.get_logs import GetLogs
 from Commands.trigger_commands import TriggerCommands
+from Commands.youtube_play import play
 from Commands.prefix import Prefix
 from main import client
 import token_babo
