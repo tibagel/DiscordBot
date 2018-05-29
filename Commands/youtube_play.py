@@ -18,3 +18,4 @@ class play(Commands):
         vp = Voice_Player(msg)
         await vp.join_voice()
         await vp.url_play(url)
+        await msg.channel.send('Now playing: '+url)

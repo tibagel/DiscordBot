@@ -16,6 +16,8 @@ class MyClient(discord.Client):
     commands['prefix'] = Prefix()
     commands['dinde'] = dinde()
     commands['play'] = play()
+    commands['stop'] = stop_player()
+    commands['pure'] = pure_soir()
 
 
     global config_checked
