@@ -15,4 +15,4 @@ class dinde(Commands):
         await vp.join_voice()
         await vp.file_play('Turkey.mp3')
         time.sleep(1)
-        await vp.voice_disconnect()
+        vp.voice_disconnect()
