@@ -9,6 +9,7 @@ client = discord.Client()
 lib = find_library('opus')
 opus.load_opus
 
+
 class play(Commands):
     async def action(self, msg, args):
         output = ''
@@ -18,4 +19,3 @@ class play(Commands):
         vp = Voice_Player(msg)
         await vp.join_voice()
         await vp.url_play(url)
-        await msg.channel.send('Now playing: '+url)

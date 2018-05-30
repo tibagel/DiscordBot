@@ -3,10 +3,8 @@ import youtube_dl
 import asyncio
 import os
 
-__author__ = 'Alex Bergeron'
 
 class Voice_Player:
-
 
     def __init__(self, msg):
         self.channel = msg.channel
@@ -22,12 +20,18 @@ class Voice_Player:
             print(e)
         return self.vc
 
+    async def join_leave(self):
+        author = self.author
+        self.vc = await discord.VoiceChannel.connect(author.voice.channel)
+        asyncio.run_coroutine_threadsafe(self.vc.disconnect(), self.vc.loop)
+
     def voice_disconnect(self):
         asyncio.run_coroutine_threadsafe(self.vc.disconnect(), self.vc.loop)
+        #await self.vc.disconnect()
 
     async def file_play(self, file):
         vc = self.vc
-        vc.play(discord.FFmpegPCMAudio(file),after=lambda e: self.voice_disconnect())
+        vc.play(discord.FFmpegPCMAudio(file))
 
     async def url_play(self, url):
         try:

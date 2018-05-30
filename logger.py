@@ -5,6 +5,7 @@ import re
 import requests
 from utils import Utils
 import asyncio
+from discord import Embed
 
 
 class Logger:
@@ -49,26 +50,38 @@ class Logger:
 
     def write_to_log(self, msg):
         atts = msg.attachments
+        embeds = msg.embeds
+        request = None
+        svr = str(msg.guild.id)
+        chan_name = msg.channel.name
+        global path
+        path = ""
         if atts:  # If the message contains something
             for att in atts:
                 if att.height > 0:
                     image_regex = re.compile(
                         "(http(s)?):(//[a-z0-9A-Z+%&?./_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
-                    svr = str(msg.guild.id)
-                    chan_name = msg.channel.name
                     request = requests.get(att.url).content
-                    global path
-                    path = ""
                     if image_regex.match(att.url):  # The attachment is an image
                         path = svr + "/" + chan_name + "/Images/" + att.filename
-                    else:  # Setting the path accordingly
-                        path = svr + "/" + chan_name + "/Files/" + att.filename
+                else:  # Setting the path accordingly
+                    path = svr + "/" + chan_name + "/Files/" + att.filename
 
+                with open(path, "wb") as file:
+                    file.write(request)
+
+        elif not embeds == Embed.Empty:
+            for emb in msg.embeds:
+                if not emb.image.url == Embed.Empty:
+                    print("image")
+                    image = emb.image
+                    path = svr + "/" + chan_name + "/Images/" + str(msg.id)
+                    request = requests.get(image.url).content
                     with open(path, "wb") as file:
                         file.write(request)
 
         else:  # If it's text, it goes in a text file, duh
-            text_log_path = Path(str(msg.guild.id) + "/" + msg.channel.name + "/text_logs.txt")
+            text_log_path = Path(str(msg.guild.id) + "/" + chan_name + "/text_logs.txt")
             text_log_file = open(text_log_path, "a+")
             text_log_file.write(Utils.msg_parser(msg) + "\n")
 
