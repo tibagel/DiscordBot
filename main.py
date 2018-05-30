@@ -47,7 +47,7 @@ class MyClient(discord.Client):
                 help_content = content.replace("help ", "")
                 cmd = parser.cmd_parser(help_content)
             else:
-                cmd = parser.cmd_parser(msg)
+                cmd = parser.cmd_parser(msg.content)
 
             try:
                 if cmd.invoke in content and help_content == "":
