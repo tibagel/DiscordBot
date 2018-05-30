@@ -38,14 +38,23 @@ class MyClient(discord.Client):
         global prefix
         prefix = Utils.get_config('Settings', prefix, msg)
         content = msg.content
-        print(Utils.msg_parser(msg))
         parser = Utils(msg)
 
         if prefix in content and not msg.author.bot:
-            cmd = parser.cmd_parser()
+            global help_content
+            help_content = ""
+            if prefix + "help" in content:
+                help_content = content.replace("help ", "")
+                cmd = parser.cmd_parser(help_content)
+            else:
+                cmd = parser.cmd_parser(msg)
+
             try:
-                if cmd.invoke in content:
+                if cmd.invoke in content and help_content == "":
                     await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+                    await self.commands[cmd.invoke].executed()
+                else:
+                    await self.commands[cmd.invoke].help(msg=msg)
             except KeyError as e:
                 print(e)
         elif not msg.author.bot:

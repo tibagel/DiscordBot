@@ -4,7 +4,12 @@ from discord import Colour
 
 
 class PingCommand(Commands):
+    def __init__(self):
+        super()
+        self.msg = None
+
     async def action(self, msg, args):
+        self.msg = msg
         from main import client
         latency_ms = int(client.latency * 1000)
         description = ":ping_pong: **{0}** ms".format(latency_ms)
@@ -13,6 +18,12 @@ class PingCommand(Commands):
             colour=Colour.magenta()
         )
         await msg.channel.send(embed=embed)
+        self.done()
 
-    async def help(self, msg):
-        return ""
+    @staticmethod
+    async def help(msg):
+        await msg.channel.send("Ping c'est pas compliqué")
+
+    async def executed(self):
+        print("Faut que j'arrête de coder de la marde")
+        return self.state

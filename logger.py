@@ -58,13 +58,12 @@ class Logger:
         global path
         path = ""
         if atts:  # If the message contains something
+            image_regex = re.compile(
+                "(http(s)?):(//[a-z0-9A-Z+%&?./_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
             for att in atts:
-                if att.height > 0:
-                    image_regex = re.compile(
-                        "(http(s)?):(//[a-z0-9A-Z+%&?./_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
+                if att.height > 0 and image_regex.match(att.url):
                     request = requests.get(att.url).content
-                    if image_regex.match(att.url):  # The attachment is an image
-                        path = svr + "/" + chan_name + "/Images/" + att.filename
+                    path = svr + "/" + chan_name + "/Images/" + att.filename
                 else:  # Setting the path accordingly
                     path = svr + "/" + chan_name + "/Files/" + att.filename
 

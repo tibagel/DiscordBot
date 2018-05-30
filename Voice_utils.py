@@ -7,7 +7,6 @@ __author__ = 'Alex Bergeron'
 
 class Voice_Player:
 
-
     def __init__(self, msg):
         self.channel = msg.channel
         self.author = msg.author
@@ -27,7 +26,7 @@ class Voice_Player:
 
     async def file_play(self, file):
         vc = self.vc
-        vc.play(discord.FFmpegPCMAudio(file),after=lambda e: self.voice_disconnect())
+        vc.play(discord.FFmpegPCMAudio(file), after=lambda e: self.voice_disconnect())
 
     async def url_play(self, url):
         try:
@@ -43,7 +42,7 @@ class Voice_Player:
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
-                vc.play(discord.FFmpegPCMAudio('yt.m4a'),after=lambda e: self.voice_disconnect())
+                vc.play(discord.FFmpegPCMAudio('yt.m4a'), after=lambda e: self.voice_disconnect())
         except Exception as e:
             print(e)
             self.voice_disconnect()

@@ -22,15 +22,15 @@ class Utils:
         formatted_msg = ('{}~{}~| {}: {} '.format(*msg))
         return formatted_msg
 
-    def cmd_parser(self):
+    @staticmethod
+    def cmd_parser(msg):
         from main import client
-        content = self.content
-        no_head = content.replace(client.get_prefix(), "")
+        no_head = msg.replace(client.get_prefix(), "")
         no_head_split = no_head.split(" ")
         invoke = no_head_split[0]
         raw_args = no_head.replace(invoke, "", 1)
         args = shlex.split(raw_args)
-        return CmdContainer(invoke, args, self.msg)
+        return CmdContainer(invoke, args, msg)
 
     def google_search(search_term, api_key, cse_id, **kwargs):
         service = build("customsearch", "v1", developerKey=api_key)

@@ -8,8 +8,10 @@ client = discord.Client()
 lib = find_library('opus')
 discord.opus.load_opus
 
+
 class dinde(Commands):
     async def action(self, msg, args):
         vp = Voice_Player(msg)
         await vp.join_voice()
         await vp.file_play('Turkey.mp3')
+
