@@ -3,7 +3,6 @@ from discord import opus
 from Commands.commands import Commands
 import discord
 from Voice_utils import Voice_Player
-import time
 
 client = discord.Client()
 lib = find_library('opus')
@@ -14,5 +13,3 @@ class dinde(Commands):
         vp = Voice_Player(msg)
         await vp.join_voice()
         await vp.file_play('Turkey.mp3')
-        time.sleep(1)
-        vp.voice_disconnect()
