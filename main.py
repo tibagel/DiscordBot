@@ -56,7 +56,7 @@ class MyClient(discord.Client):
                 else:
                     await self.commands[cmd.invoke].help(msg=msg)
             except KeyError as e:
-                print(e)
+                print('{} 404: Command not found '.format(e))
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
