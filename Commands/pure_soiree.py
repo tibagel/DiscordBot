@@ -9,7 +9,7 @@ lib = find_library('opus')
 opus.load_opus
 
 
-class pure_soir(Commands):
+class PureSoiree(Commands):
     async def action(self, msg, args):
         vp = Voice_Player(msg)
         await vp.join_voice()
