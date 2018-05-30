@@ -43,8 +43,11 @@ class MyClient(discord.Client):
 
         if prefix in content and not msg.author.bot:
             cmd = parser.cmd_parser()
-            if cmd.invoke in content:
-                await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+            try:
+                if cmd.invoke in content:
+                    await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+            except KeyError as e:
+                print(e)
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)

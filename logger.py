@@ -6,6 +6,7 @@ import requests
 from utils import Utils
 import asyncio
 from discord import Embed
+from discord import *
 
 
 class Logger:
