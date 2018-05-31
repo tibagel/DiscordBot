@@ -6,7 +6,6 @@ import os
 __author__ = 'Alex Bergeron'
 
 class Voice_Player:
-
     def __init__(self, msg):
         self.channel = msg.channel
         self.author = msg.author
