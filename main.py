@@ -39,6 +39,7 @@ class MyClient(discord.Client):
         prefix = Utils.get_config('Settings', prefix, msg)
         content = msg.content
         parser = Utils(msg)
+        print(parser.msg_parser())
 
         if prefix in content and not msg.author.bot:
             global help_content
