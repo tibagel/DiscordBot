@@ -15,8 +15,8 @@ class play(Commands):
         output = ''
         for word in args:
             output += word + ' '
-        #url = Utils.q_google('youtube.com:'+output)
+        url = Utils.q_google('youtube.com:'+output)
         vp = Voice_Player(msg)
         await vp.join_voice()
-        await vp.url_play('https://www.youtube.com/watch?v=SpbJ9xyoa18')
-        await msg.channel.send('Now playing: '+'https://www.youtube.com/watch?v=SpbJ9xyoa18')
+        await vp.url_play(url)
+        await msg.channel.send('Now playing: '+url)
