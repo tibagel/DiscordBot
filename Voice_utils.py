@@ -28,7 +28,7 @@ class Voice_Player:
         vc = self.vc
         vc.play(discord.FFmpegPCMAudio(file), after=lambda e: self.voice_disconnect())
 
-    async def url_play(self, url):
+    async def url_play(self,url):
         try:
             os.remove('yt.m4a')
             vc = self.vc
@@ -43,6 +43,8 @@ class Voice_Player:
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
                 vc.play(discord.FFmpegPCMAudio('yt.m4a'), after=lambda e: self.voice_disconnect())
+            if self.content == '!stop':
+                self.voice_disconnect()
         except Exception as e:
             print(e)
             self.voice_disconnect()
