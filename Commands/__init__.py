@@ -9,6 +9,7 @@ from Commands.trigger_commands import TriggerCommands
 from Commands.youtube_play import play
 from Commands.Stop_player import stop_player
 from Commands.pure_soiree import PureSoiree
+from Commands.cmd_git import CmdGit
 from Commands.prefix import Prefix
 from main import client
 import token_babo

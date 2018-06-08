@@ -18,6 +18,7 @@ class MyClient(discord.Client):
     commands['play'] = play()
     commands['stop'] = stop_player()
     commands['pure'] = PureSoiree()
+    commands['git'] = CmdGit()
 
 
     global config_checked
