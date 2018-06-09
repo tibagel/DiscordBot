@@ -51,7 +51,7 @@ class MyClient(discord.Client):
 
             try:
                 if cmd.invoke in content and help_content == "":
-                    await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+                    thread = Thread(targer=await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
                     await self.commands[cmd.invoke].executed()
                 else:
                     await self.commands[cmd.invoke].help(msg=msg)

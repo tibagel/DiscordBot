@@ -30,6 +30,9 @@ class Voice_Player:
     async def url_play(self, url):
         try:
             os.remove('yt.m4a')
+        except Exception as e:
+            pass
+        try:
             vc = self.vc
             ydl_opts = {
                 'outtmpl': 'yt.m4a',
