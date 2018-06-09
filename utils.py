@@ -57,7 +57,7 @@ class Utils:
             config.read(path)
             return config.get(setting, "prefix")
 
-    def embed_templ(title, description, field1, field2, author, image_author):
+    def embed_templ(title, description=None, field1=None, field2=None, author=None, image_author=None):
         embed = Embed(
             title=title,
             description=description,
