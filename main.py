@@ -48,6 +48,9 @@ class MyClient(discord.Client):
             if prefix + "help" in content:
                 help_content = content.replace("help ", "")
                 cmd = parser.cmd_parser(help_content)
+            elif prefix + "stop" in content:
+                for cli in client.voice_clients:
+                    cli.voice_disconnect()
             else:
                 cmd = parser.cmd_parser(msg.content)
 
