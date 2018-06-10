@@ -7,6 +7,8 @@ __author__ = 'Alex Bergeron'
 
 class Voice_Player:
 
+    vc = None
+    
     def __init__(self, msg):
         self.channel = msg.channel
         self.author = msg.author
@@ -16,22 +18,21 @@ class Voice_Player:
     async def join_voice(self):
         try:
             author = self.author
-            self.vc = await discord.VoiceChannel.connect(author.voice.channel)
+            global vc
+            vc = await discord.VoiceChannel.connect(author.voice.channel)
         except Exception as e:
             print(e)
         return self.vc
 
     def voice_disconnect(self):
-        asyncio.run_coroutine_threadsafe(self.vc.disconnect(), self.vc.loop)
+        asyncio.run_coroutine_threadsafe(vc.disconnect(), self.vc.loop)
 
     async def file_play(self, file):
-        vc = self.vc
         vc.play(discord.FFmpegPCMAudio(file), after=lambda e: self.voice_disconnect())
 
     async def url_play(self,url):
         try:
             os.remove('yt.m4a')
-            vc = self.vc
             ydl_opts = {
                 'outtmpl': 'yt.m4a',
                 'format': 'bestaudio/best',

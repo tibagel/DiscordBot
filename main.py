@@ -50,18 +50,17 @@ class MyClient(discord.Client):
                 cmd = parser.cmd_parser(help_content)
             elif prefix + "stop" in content:
                 for cli in client.voice_clients:
-                    cli.voice_disconnect()
+                    await cli.disconnect()
             else:
                 cmd = parser.cmd_parser(msg.content)
-
-            try:
-                if cmd.invoke in content and help_content == "":
-                    await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
-                    await self.commands[cmd.invoke].executed()
-                else:
-                    await self.commands[cmd.invoke].help(msg=msg)
-            except KeyError as e:
-                print('{} 404: Command not found '.format(e))
+                try:
+                    if cmd.invoke in content and help_content == "":
+                        await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+                        await self.commands[cmd.invoke].executed()
+                    else:
+                        await self.commands[cmd.invoke].help(msg=msg)
+                except KeyError as e:
+                    print('{} 404: Command not found '.format(e))
         elif not msg.author.bot:
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
