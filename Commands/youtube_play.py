@@ -21,6 +21,4 @@ class play(Commands):
         await vp.join_voice()
         await vp.url_play(url)
         await msg.channel.send('Now playing: '+url)
-        if msg.content == '!stop':
-            vp.voice_disconnect()
 
