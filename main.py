@@ -16,7 +16,6 @@ class MyClient(discord.Client):
     commands['prefix'] = Prefix()
     commands['dinde'] = dinde()
     commands['play'] = play()
-    commands['stop'] = stop_player()
     commands['pure'] = PureSoiree()
     commands['git'] = CmdGit()
 
