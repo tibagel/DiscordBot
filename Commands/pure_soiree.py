@@ -10,7 +10,7 @@ opus.load_opus
 
 
 class PureSoiree(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         vp = Voice_Player(msg)
         await vp.join_voice()
         await vp.file_play('pure_soire.mp3')

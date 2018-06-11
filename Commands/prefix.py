@@ -3,7 +3,7 @@ import configparser
 
 
 class Prefix(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         config = configparser.RawConfigParser()
         config.read(str(msg.guild.id)+'/config.ini')
         prefix = ''

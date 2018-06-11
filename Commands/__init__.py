@@ -10,6 +10,7 @@ from Commands.youtube_play import play
 from Commands.pure_soiree import PureSoiree
 from Commands.cmd_git import CmdGit
 from Commands.prefix import Prefix
+from Commands.stop_player import StopPlayer
 from main import client
 import token_babo
 client.run(token_babo.token)

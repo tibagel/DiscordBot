@@ -18,6 +18,7 @@ class MyClient(discord.Client):
     commands['play'] = play()
     commands['pure'] = PureSoiree()
     commands['git'] = CmdGit()
+    commands['stop'] = StopPlayer()
 
 
     global config_checked
@@ -47,14 +48,11 @@ class MyClient(discord.Client):
             if prefix + "help" in content:
                 help_content = content.replace("help ", "")
                 cmd = parser.cmd_parser(help_content)
-            elif prefix + "stop" in content:
-                for cli in client.voice_clients:
-                    await cli.disconnect()
             else:
                 cmd = parser.cmd_parser(msg.content)
                 try:
                     if cmd.invoke in content and help_content == "":
-                        await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+                        await self.commands[cmd.invoke].action(msg=msg, args=cmd.args, client=client)
                         await self.commands[cmd.invoke].executed()
                     else:
                         await self.commands[cmd.invoke].help(msg=msg)

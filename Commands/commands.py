@@ -2,7 +2,7 @@ class Commands:
     def __init__(self):
         self.state = False
 
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         return True
 
     @staticmethod

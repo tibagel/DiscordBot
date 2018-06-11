@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 class TriggerCommands(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         args_list = list(args)
         param1 = args_list[0]
         triggers = ""

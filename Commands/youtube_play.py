@@ -10,7 +10,7 @@ opus.load_opus
 
 
 class play(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         output = ''
         for word in args:
             output += word + ' '

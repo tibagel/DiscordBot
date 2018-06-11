@@ -8,7 +8,7 @@ class PingCommand(Commands):
         super()
         self.msg = None
 
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         self.msg = msg
         from main import client
         latency_ms = int(client.latency * 1000)

@@ -3,7 +3,7 @@ from discord import File
 
 
 class GetLogs(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         channel = msg.channel
         file_path = str(msg.guild.id) + "/" + channel.name + "/text_logs.txt"
         label = "tiens! " + msg.author.mention + "Les logs"
