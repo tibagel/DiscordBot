@@ -19,6 +19,8 @@ class MyClient(discord.Client):
     commands['pure'] = PureSoiree()
     commands['git'] = CmdGit()
     commands['stop'] = StopPlayer()
+    commands['resume'] = ResumePlayer()
+    commands['pause'] = PausePlayer()
 
 
     global config_checked
