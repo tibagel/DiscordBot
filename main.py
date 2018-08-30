@@ -3,6 +3,8 @@ from utils import Utils
 from Commands import *
 import configparser
 from logger import Logger
+from threading import Thread
+import functools
 
 
 class MyClient(discord.Client):
@@ -18,7 +20,6 @@ class MyClient(discord.Client):
     commands['play'] = play()
     commands['stop'] = stop_player()
     commands['pure'] = PureSoiree()
-    commands['git'] = CmdGit()
 
 
     global config_checked
@@ -28,6 +29,7 @@ class MyClient(discord.Client):
     global prefix
     prefix = ""
     text_triggers = {}
+
 
     async def on_ready(self):
         print('|logged in as {} .  The discord version is {}|'.format(self.user, discord.__version__))
@@ -40,7 +42,6 @@ class MyClient(discord.Client):
         prefix = Utils.get_config('Settings', prefix, msg)
         content = msg.content
         parser = Utils(msg)
-        print(parser.msg_parser())
 
         if prefix in content and not msg.author.bot:
             global help_content
@@ -53,7 +54,7 @@ class MyClient(discord.Client):
 
             try:
                 if cmd.invoke in content and help_content == "":
-                    thread = Thread(targer=await self.commands[cmd.invoke].action(msg=msg, args=cmd.args)
+                    Thread(target=await self.commands[cmd.invoke].action(msg, cmd.args)).start()
                     await self.commands[cmd.invoke].executed()
                 else:
                     await self.commands[cmd.invoke].help(msg=msg)
