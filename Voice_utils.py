@@ -45,8 +45,6 @@ class Voice_Player:
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
                 vc.play(discord.FFmpegPCMAudio('yt.m4a'), after=lambda e: self.voice_disconnect())
-            if self.content == '!stop':
-                self.voice_disconnect()
         except Exception as e:
             print(e)
             self.voice_disconnect()

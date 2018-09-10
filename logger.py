@@ -61,10 +61,11 @@ class Logger:
             image_regex = re.compile(
                 "(http(s)?):(//[a-z0-9A-Z+%&?./_-]+)(\\.(jp(e)?g)|(tif(f)?)|gif|bmp|png|ico)")
             for att in atts:
-                if att.height > 0 and image_regex.match(att.url):
+                if att.height and image_regex.match(att.url):
                     request = requests.get(att.url).content
                     path = svr + "/" + chan_name + "/Images/" + att.filename
                 else:  # Setting the path accordingly
+                    request = requests.get(att.url).content
                     path = svr + "/" + chan_name + "/Files/" + att.filename
 
                 with open(path, "wb") as file:

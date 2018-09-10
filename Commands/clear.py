@@ -2,7 +2,7 @@ from Commands.commands import Commands
 
 
 class Clear(Commands):
-    async def action(self, msg, args):
+    async def action(self, msg, args, client):
         channel = msg.channel
         messages = []
         async for message in channel.history(limit=int(args[0])):

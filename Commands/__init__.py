@@ -7,10 +7,12 @@ from Commands.dinde import dinde
 from Commands.get_logs import GetLogs
 from Commands.trigger_commands import TriggerCommands
 from Commands.youtube_play import play
-from Commands.Stop_player import stop_player
 from Commands.pure_soiree import PureSoiree
 from Commands.cmd_git import CmdGit
 from Commands.prefix import Prefix
+from Commands.stop_player import StopPlayer
+from Commands.resume_player import ResumePlayer
+from Commands.pause_player import PausePlayer
 from main import client
 import token_babo
 client.run(token_babo.token)
