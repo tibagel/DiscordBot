@@ -11,7 +11,7 @@ class Voice_Player:
         self.author = msg.author
         self.content = msg.content
         self.msg = msg
-        self.vc = None
+        self.vc = msg.guild.voice_client
 
     async def join_voice(self):
         try:

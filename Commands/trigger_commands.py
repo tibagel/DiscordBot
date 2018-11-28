@@ -13,24 +13,24 @@ class TriggerCommands(Commands):
         triggers = ""
         config_file_path = Path(str(msg.guild.id) + "/triggers.ini")
         trigger_config = configparser.ConfigParser()
-        trigger_config.read(config_file_path)
+        trigger_config.read(str(msg.guild.id) + "/triggers.ini")
         text_triggers = Logger.get_triggers(Logger)
 
-        if param1 == "add" and args_list[2]:
+        if param1 == "add" and args_list[2] and args_list[3]:
             key = args_list[1]
             value = args_list[2]
             text_triggers[key] = value
             await msg.channel.send("Trigger :**" + key + "** Added")
             trigger_config.set("text_triggers", key, value)
-            with open(config_file_path, "w") as config_file:
+            with open(str(msg.guild.id) + "/triggers.ini", "w") as config_file:
                 trigger_config.write(config_file)
 
-        elif param1 == "del":
+        elif param1 == "del" and args_list[2]:
             key = args_list[1]
             if key in text_triggers:
                 del text_triggers[key]
                 trigger_config.remove_option("text_triggers", key)
-                with open(config_file_path, "w") as config_file:
+                with open(str(msg.guild.id) + "/triggers.ini", "w") as config_file:
                     trigger_config.write(config_file)
                 await msg.channel.send("Trigger **" + key + "** deleted")
             else:
