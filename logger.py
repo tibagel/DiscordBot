@@ -41,7 +41,7 @@ class Logger:
             conf_file.close()
         else:
             trigger_conf = configparser.ConfigParser()
-            trigger_conf.read(config_file_path)
+            trigger_conf.read(str(server) + "/triggers.ini")
             for key, val in trigger_conf.items("text_triggers"):
                 txt_triggers[key] = val
 
