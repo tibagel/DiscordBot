@@ -2,16 +2,15 @@ from ctypes.util import find_library
 from discord import opus
 from Commands.commands import Commands
 import discord
-from Voice_utils import Voice_Player
+from voice_utils import VoicePlayer
 
 client = discord.Client()
 lib = find_library('opus')
 discord.opus.load_opus
 
 
-class dinde(Commands):
+class Dinde(Commands):
     async def action(self, msg, args, client):
-        vp = Voice_Player(msg)
+        vp = VoicePlayer(msg)
         await vp.join_voice()
         await vp.file_play('Turkey.mp3')
-

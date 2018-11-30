@@ -14,7 +14,7 @@ class MyClient(discord.Client):
     commands['getlogs'] = GetLogs()
     commands['trigger'] = TriggerCommands()
     commands['prefix'] = Prefix()
-    commands['dinde'] = dinde()
+    commands['dinde'] = Dinde()
     commands['play'] = Play()
     commands['pure'] = PureSoiree()
     commands['git'] = CmdGit()
@@ -64,8 +64,10 @@ class MyClient(discord.Client):
             logger.write_to_log(msg=msg)
             await logger.check_for_triggers(msg)
 
-    def get_prefix(self):
+    @staticmethod
+    def get_prefix():
         return prefix
 
 
 client = MyClient()
+

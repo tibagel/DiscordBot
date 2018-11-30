@@ -5,7 +5,7 @@ import re
 import requests
 from utils import Utils
 from Commands import youtube_play
-from Voice_utils import Voice_Player
+from voice_utils import VoicePlayer
 import asyncio
 from discord import Embed
 from discord import *
@@ -15,7 +15,8 @@ class Logger:
     global txt_triggers
     txt_triggers = {}
 
-    def check_dirs(self, server, channels):
+    @staticmethod
+    def check_dirs(server, channels):
         server_dir = Path(str(server))
         if not server_dir.exists():  # Checking if the log directory exists for this server
             os.makedirs(server_dir)
@@ -47,11 +48,11 @@ class Logger:
             for key, val in trigger_conf.items("text_triggers"):
                 txt_triggers[key] = val
 
-
         global config_checked
         config_checked = True
 
-    def write_to_log(self, msg):
+    @staticmethod
+    def write_to_log(msg):
         atts = msg.attachments
         embeds = msg.embeds
         request = None
@@ -92,12 +93,12 @@ class Logger:
     async def check_for_triggers(self, msg):
         content = msg.content
         for key in txt_triggers:
-            if key in content:
-                if txt_triggers[key].startswith("http"):
-                    yplay = youtube_play.Play()
-                    await yplay.play(vp=Voice_Player(msg), channel=msg.channel, url=txt_triggers[key])
-                else:
+            if key in content:  # If the message contains a Trigger word
+                if txt_triggers[key].startswith("http"):  # If the trigger key starts with http it means it's an audio trigger
+                    await youtube_play.Play().play(vp=VoicePlayer(msg), channel=msg.channel, url=txt_triggers[key])
+                else:  # Else it's a plain text trigger
                     await msg.channel.send(txt_triggers[key])
 
-    def get_triggers(self):
+    @staticmethod
+    def get_triggers():
         return txt_triggers

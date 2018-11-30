@@ -3,7 +3,7 @@ from Commands.ping_command import PingCommand
 from Commands.clear import Clear
 from Commands.change_game import ChangeGame
 from Commands.googlesearch import Gsearch
-from Commands.dinde import dinde
+from Commands.dinde import Dinde
 from Commands.get_logs import GetLogs
 from Commands.trigger_commands import TriggerCommands
 from Commands.youtube_play import Play

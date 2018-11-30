@@ -4,12 +4,7 @@ from discord import Colour
 
 
 class PingCommand(Commands):
-    def __init__(self):
-        super()
-        self.msg = None
-
     async def action(self, msg, args, client):
-        self.msg = msg
         from main import client
         latency_ms = int(client.latency * 1000)
         description = ":ping_pong: **{0}** ms".format(latency_ms)

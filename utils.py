@@ -73,4 +73,3 @@ class CmdContainer:
         self.invoke = invoke
         self.args = args
         self.message = msg
-
