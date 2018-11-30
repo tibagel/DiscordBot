@@ -42,6 +42,7 @@ class Utils:
         for result in results:
             return result['link']
 
+    @staticmethod
     def get_config(setting, option, msg):
         path = str(msg.guild.id)+'/config.ini'
         file = Path(path)

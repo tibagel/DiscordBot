@@ -37,7 +37,7 @@ class MyClient(discord.Client):
 
     async def on_message(self, msg):
         logger = Logger()
-        Logger.check_dirs(logger, msg.guild.id, msg.guild.text_channels)
+        Logger.check_dirs(msg.guild.id, msg.guild.text_channels)
         global prefix
         prefix = Utils.get_config('Settings', prefix, msg)
         content = msg.content

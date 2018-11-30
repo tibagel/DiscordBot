@@ -75,17 +75,8 @@ class Logger:
                     file.write(request)
 
         elif not embeds == Embed.Empty:
-            for emb in msg.embeds:
-                if not emb.image.url == Embed.Empty:
-                    print("image")
-                    image = emb.image
-                    path = svr + "/" + chan_name + "/Images/" + str(msg.id)
-                    request = requests.get(image.url).content
-                    with open(path, "wb") as file:
-                        file.write(request)
-
-        else:  # If it's text, it goes in a text file, duh
-            text_log_path = Path(str(msg.guild.id) + "/" + chan_name + "/text_logs.txt")
+            print("ouin")
+            text_log_path = str(msg.guild.id) + "/" + chan_name + "/text_logs.txt"
             text_log_file = open(text_log_path, "a+")
             text_log_file.write(Utils.msg_parser(msg) + "\n")
 
@@ -98,6 +89,7 @@ class Logger:
                     await youtube_play.Play().play(vp=VoicePlayer(msg), channel=msg.channel, url=txt_triggers[key])
                 else:  # Else it's a plain text trigger
                     await msg.channel.send(txt_triggers[key])
+
 
     @staticmethod
     def get_triggers():
