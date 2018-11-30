@@ -4,6 +4,8 @@ import configparser
 import re
 import requests
 from utils import Utils
+from Commands import youtube_play
+from Voice_utils import Voice_Player
 import asyncio
 from discord import Embed
 from discord import *
@@ -91,7 +93,11 @@ class Logger:
         content = msg.content
         for key in txt_triggers:
             if key in content:
-                await msg.channel.send(txt_triggers[key])
+                if txt_triggers[key].startswith("http"):
+                    yplay = youtube_play.Play()
+                    await yplay.play(vp=Voice_Player(msg), channel=msg.channel, url=txt_triggers[key])
+                else:
+                    await msg.channel.send(txt_triggers[key])
 
     def get_triggers(self):
         return txt_triggers

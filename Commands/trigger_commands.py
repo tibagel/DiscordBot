@@ -3,7 +3,6 @@ from logger import Logger
 import configparser
 from discord import Embed
 from discord import Colour
-from pathlib import Path
 
 
 class TriggerCommands(Commands):
@@ -11,12 +10,11 @@ class TriggerCommands(Commands):
         args_list = list(args)
         param1 = args_list[0]
         triggers = ""
-        config_file_path = Path(str(msg.guild.id) + "/triggers.ini")
         trigger_config = configparser.ConfigParser()
         trigger_config.read(str(msg.guild.id) + "/triggers.ini")
         text_triggers = Logger.get_triggers(Logger)
 
-        if param1 == "add" and args_list[2] and args_list[3]:
+        if param1 == "add" and args_list[2]:
             key = args_list[1]
             value = args_list[2]
             text_triggers[key] = value

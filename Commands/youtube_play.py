@@ -9,13 +9,18 @@ lib = find_library('opus')
 opus.load_opus
 
 
-class play(Commands):
+class Play(Commands):
+    def __init__(self):
+        super()
+
     async def action(self, msg, args, client):
         output = ''
         for word in args:
             output += word + ' '
-        url = Utils.q_google('youtube.com:'+output)
-        vp = Voice_Player(msg)
+            url = Utils.q_google('youtube.com:' + output)
+        await self.play(Voice_Player(msg), msg.channel, url)
+
+    async def play(self, vp, channel, url):
         await vp.join_voice()
         await vp.url_play(url)
-        await msg.channel.send('Now playing: '+url)
+        await channel.send('Now playing: '+url)
