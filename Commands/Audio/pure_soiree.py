@@ -1,5 +1,5 @@
 from Commands.commands import Commands
-from voice_utils import VoicePlayer
+from Commands.Audio.voice_utils import VoicePlayer
 from discord import opus
 import discord
 from ctypes.util import find_library

@@ -1,6 +1,6 @@
 from Commands.commands import Commands
 from utils import Utils
-from voice_utils import VoicePlayer
+from Commands.Audio.voice_utils import VoicePlayer
 from ctypes.util import find_library
 import discord
 from discord import opus
@@ -15,13 +15,15 @@ class Play(Commands):
 
     async def action(self, msg, args, client):
         output = ''
+        url = ''
         for word in args:
             output += word + ' '
             url = Utils.q_google('youtube.com:' + output)
-        await self.play(VoicePlayer(msg), msg.channel, url)
+        await msg.channel.send('Now playing: ' + url)
+        await self.play(VoicePlayer(msg), url=url)
 
     @staticmethod
-    async def play(vp, channel, url):
+    async def play(vp, url):
         await vp.join_voice()
         await vp.url_play(url)
-        await channel.send('Now playing: '+url)
+

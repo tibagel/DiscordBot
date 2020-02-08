@@ -1,27 +1,26 @@
 import discord
 from utils import Utils
-from Commands import *
+import Commands
 import configparser
 from logger import Logger
 
 
 class MyClient(discord.Client):
     commands = dict()
-    commands["ping"] = PingCommand()
-    commands["clear"] = Clear()
-    commands['changeGame'] = ChangeGame()
-    commands['search'] = Gsearch()
-    commands['getlogs'] = GetLogs()
-    commands['trigger'] = TriggerCommands()
-    commands['prefix'] = Prefix()
-    commands['dinde'] = Dinde()
-    commands['play'] = Play()
-    commands['pure'] = PureSoiree()
-    commands['git'] = CmdGit()
-    commands['stop'] = StopPlayer()
-    commands['resume'] = ResumePlayer()
-    commands['pause'] = PausePlayer()
-
+    commands["ping"] = Commands.PingCommand()
+    commands["clear"] = Commands.Clear()
+    commands['changegame'] = Commands.ChangeGame()
+    commands['search'] = Commands.Gsearch()
+    commands['getlogs'] = Commands.GetLogs()
+    commands['trigger'] = Commands.TriggerCommands()
+    commands['prefix'] = Commands.Prefix()
+    commands['dinde'] = Commands.Dinde()
+    commands['play'] = Commands.Play()
+    commands['pure'] = Commands.PureSoiree()
+    commands['git'] = Commands.CmdGit()
+    commands['stop'] = Commands.StopPlayer()
+    commands['resume'] = Commands.ResumePlayer()
+    commands['pause'] = Commands.PausePlayer()
 
     global config_checked
     config_checked = False

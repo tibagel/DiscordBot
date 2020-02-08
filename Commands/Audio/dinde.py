@@ -1,12 +1,11 @@
 from ctypes.util import find_library
-from discord import opus
 from Commands.commands import Commands
 import discord
-from voice_utils import VoicePlayer
+from Commands.Audio.voice_utils import VoicePlayer
 
 client = discord.Client()
 lib = find_library('opus')
-discord.opus.load_opus
+discord.opus.load_opus(lib)
 
 
 class Dinde(Commands):

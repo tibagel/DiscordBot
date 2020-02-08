@@ -4,10 +4,9 @@ import configparser
 import re
 import requests
 from utils import Utils
-from Commands import youtube_play
-from voice_utils import VoicePlayer
+from Commands.Audio import youtube_play
+from Commands.Audio.voice_utils import VoicePlayer
 import asyncio
-from discord import Embed
 from discord import *
 
 
@@ -86,7 +85,7 @@ class Logger:
         for key in txt_triggers:
             if key in content:  # If the message contains a Trigger word
                 if txt_triggers[key].startswith("http"):  # If the trigger key starts with http it means it's an audio trigger
-                    await youtube_play.Play().play(vp=VoicePlayer(msg), channel=msg.channel, url=txt_triggers[key])
+                    await youtube_play.Play().play(vp=VoicePlayer(msg), url=txt_triggers[key])
                 else:  # Else it's a plain text trigger
                     await msg.channel.send(txt_triggers[key])
 

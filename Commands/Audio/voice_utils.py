@@ -29,7 +29,7 @@ class VoicePlayer:
         vc = self.vc
         vc.play(discord.FFmpegPCMAudio(file), after=lambda e: self.voice_disconnect())
 
-    async def url_play(self,url):
+    async def url_play(self, url):
         try:
             os.remove('yt.m4a')
         except Exception as e:

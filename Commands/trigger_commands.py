@@ -12,7 +12,7 @@ class TriggerCommands(Commands):
         triggers = ""
         trigger_config = configparser.ConfigParser()
         trigger_config.read(str(msg.guild.id) + "/triggers.ini")
-        text_triggers = Logger.get_triggers(Logger)
+        text_triggers = Logger.get_triggers()
 
         if param1 == "add" and args_list[2]:
             key = args_list[1]

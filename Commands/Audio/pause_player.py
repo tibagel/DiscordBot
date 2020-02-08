@@ -1,9 +1,8 @@
 from Commands.commands import Commands
 
 
-
-class ResumePlayer(Commands):
+class PausePlayer(Commands):
     async def action(self, msg, args, client):
         for cli in client.voice_clients:
-            cli.resume()
-            await msg.channel.send('Resumed the shit')
+            cli.pause()
+            await msg.channel.send('Paused the shit')
